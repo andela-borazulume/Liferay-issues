@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import * as githubData from './data';
+import FormContainer from './FormContainer';
+import Chart from './Chart';
 
 class App extends Component {
   state = {
+    stateObj: {},
     issueList: [],
     fromDate: '',
-    toDate: ''
+    toDate: '',
+    data: [],
+    labels: []
   }
 
   fetchIssues() {
@@ -38,6 +43,8 @@ class App extends Component {
       acc[issue.state] = (acc[issue.state]) ? acc[issue.state] + 1 : 1
       return acc
     }, {});
+
+    this.setState({stateObj: obj})
   }
 
   onSubmit = (event) => {
@@ -47,11 +54,13 @@ class App extends Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit}>
-        From: <input type='date' name='fromDate' onChange={this.changeState} required />
-        To: <input type='date' name='toDate' onChange={this.changeState} required />
-        <input type='submit' />
-      </form>
+      <div>
+        <FormContainer
+          onSubmit={this.onSubmit}
+          changeState={this.changeState} />
+        <Chart 
+          data={this.state.stateObj}/>
+      </div>
     );
   }
 }

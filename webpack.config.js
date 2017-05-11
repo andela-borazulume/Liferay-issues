@@ -15,9 +15,6 @@ module.exports = {
       test: /\.js$/,
       exclude: /node_modules/,
       loader: 'babel-loader',
-      query: {
-        presets: ['react', 'es2015', 'stage-0']
-      }
     }]
   },
   devServer: {
@@ -28,5 +25,10 @@ module.exports = {
       template: 'index.html',
       filename: './index.html'
     })
-  ]
+  ],
+  externals: {
+    'cheerio': 'window',
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true,
+  }
 }

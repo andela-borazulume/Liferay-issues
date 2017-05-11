@@ -15,11 +15,6 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({issueList: githubData.data})
-    // this.fetchIssues()
-    //   .then((issueList) => {
-    //     console.log(issueList, 'issues')
-    //     this.setState({issueList})
-    //   });
   }
 
   changeState = (event) => {
@@ -35,10 +30,9 @@ class App extends Component {
 
   getNumberOfCloseOpenIssues() {
     let getIssueRange = this.getIssueRange();
-    console.log(getIssueRange, 'new issue range');
 
     const obj = getIssueRange.reduce((acc, issue) => {
-      // acc[issue][]
+      console.log(issue)
     }, {})
   }
 

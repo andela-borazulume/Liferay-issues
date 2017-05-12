@@ -6,11 +6,20 @@ import sinon from "sinon";
 import FormContainer from "../src/FormContainer";
 
 describe('<FormContainer/>', () => {
+  let wrapper;
+  before(() => {
+    wrapper = shallow(<FormContainer />);
+  })
+  it("should render the FormContainer component", () => {
+    expect(wrapper.find(FormContainer)).to.have.length(1);
+  })
   it('it should have props onSubmit and changeState to FormContainer component', () => {
-    const getDataMethod = '';
-    const FormContainer = shallow(<FormContainer />);
-    expect(FormContainer.prop('...getDataMethod')).to.eql(onSubmit);
-    expect(FormContainer.prop('...getDataMethod')).to.eql(changeState);
+    expect(wrapper.props().onSubmit).to.be.defined;
+    expect(wrapper.props().changeState).to.be.defined;
+  });
+
+  it('should have input of length 3', function () {
+    expect(wrapper.find('input')).to.have.length(3);
   });
 
 })

@@ -42,7 +42,6 @@ class App extends Component {
     }, {});
 
     this.setState({ stateObj: obj }, () => {
-      console.log(this.state.stateObj, 'states')
        setUpChart(this.state.stateObj);
     })
   }

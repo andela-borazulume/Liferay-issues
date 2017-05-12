@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import * as githubData from './data';
 import FormContainer from './FormContainer';
-import Chart from './Chart';
+import ShowChart, { setUpChart } from './showChart';
 
 class App extends Component {
   state = {
     stateObj: {},
     issueList: [],
     fromDate: '',
-    toDate: '',
-    data: [],
-    labels: []
+    toDate: ''
   }
 
   fetchIssues() {
@@ -38,13 +36,15 @@ class App extends Component {
 
   getNumberOfCloseOpenIssues() {
     let getIssueRange = this.getIssueRange();
-
     const obj = getIssueRange.reduce((acc, issue) => {
       acc[issue.state] = (acc[issue.state]) ? acc[issue.state] + 1 : 1
       return acc
     }, {});
 
-    this.setState({stateObj: obj})
+    this.setState({ stateObj: obj }, () => {
+      console.log(this.state.stateObj, 'states')
+       setUpChart(this.state.stateObj);
+    })
   }
 
   onSubmit = (event) => {
@@ -57,12 +57,12 @@ class App extends Component {
       <div>
         <FormContainer
           onSubmit={this.onSubmit}
-          changeState={this.changeState} />
-        <Chart 
-          data={this.state.stateObj}/>
+          changeState={this.changeState}/>
+
+        <ShowChart />
+        <canvas id="mychart"></canvas>
       </div>
     );
   }
 }
-
 export default App;

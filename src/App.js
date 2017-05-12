@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as githubData from './data';
 import FormContainer from './FormContainer';
-import ShowChart, { setUpChart } from './showChart';
+import SetUpChart from './SetUpChart';
 
 class App extends Component {
   state = {
@@ -29,7 +29,7 @@ class App extends Component {
 
   getIssueRange() {
     let { issueList, fromDate, toDate } = this.state;
-    return issueList.filter((issue) => {
+    return githubData.data.filter((issue) => {
       return (new Date(fromDate) <= new Date(issue.created_at) && new Date(toDate) >= new Date(issue.created_at))
     })
   }
@@ -40,9 +40,9 @@ class App extends Component {
       acc[issue.state] = (acc[issue.state]) ? acc[issue.state] + 1 : 1
       return acc
     }, {});
-
+    
     this.setState({ stateObj: obj }, () => {
-       setUpChart(this.state.stateObj);
+       SetUpChart(this.state.stateObj);
     })
   }
 
@@ -57,9 +57,9 @@ class App extends Component {
         <FormContainer
           onSubmit={this.onSubmit}
           changeState={this.changeState}/>
-
-        <ShowChart />
-        <canvas id="mychart"></canvas>
+          <div style={{height: 500, width: 500}}>
+          <canvas id="mychart" ></canvas>
+          </div>
       </div>
     );
   }

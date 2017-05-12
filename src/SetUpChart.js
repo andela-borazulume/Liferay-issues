@@ -1,8 +1,12 @@
 import React from 'react';
 import Chart from 'chart.js';
 
-export const setUpChart = (stateData) => {
-  console.log(stateData, 'hello miss ssiiiii')
+const SetUpChart = (stateData) => {
+  if(stateData !== null) {
+
+  let total = stateData.closed + stateData.open;
+  let closed = (stateData.closed/total)*100;
+  let open = 100 - closed;
 
   let ctx = document.getElementById('mychart');
   return new Chart(ctx, {
@@ -14,7 +18,7 @@ export const setUpChart = (stateData) => {
       ],
       datasets: [
         {
-          data: [stateData.closed, stateData.open],
+          data: [closed, open],
           backgroundColor: [
             "#FF6384",
             "#36A2EB"
@@ -22,23 +26,12 @@ export const setUpChart = (stateData) => {
           hoverBackgroundColor: [
             "#FF6384",
             "#36A2EB"
-          ]
+          ],
+          borderWidth: 2
         }]
     }
   });
+  }
 }
 
-const showChart = (props) => {
-  console.log('got here?')
-  // console.log(props, 'properties')
-  // if (props.data === null) {
-  //   return;
-  // }
-  // console.log(props, 'hello miss miss miss')
-  // setUpChart()
-  return (
-    <div />
-  );
-};
-
-export default showChart;
+export default SetUpChart;

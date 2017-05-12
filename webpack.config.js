@@ -17,6 +17,7 @@ module.exports = {
       loader: 'babel-loader',
     }]
   },
+  devtool: 'eval',
   devServer: {
     port: 4500
   },

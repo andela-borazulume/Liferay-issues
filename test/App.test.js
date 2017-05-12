@@ -31,6 +31,26 @@ describe('<App/>', () => {
     wrapper.instance().onSubmit({preventDefault: () => null});
     expect(App.prototype.getNumberOfCloseOpenIssues.calledOnce).to.equal(true);
   });
+
+   it('it should have method getNumberOfCloseOpenIssues', () => {
+    sinon.stub(App.prototype, 'getIssueRange', () => null);
+    wrapper.instance().getNumberOfCloseOpenIssues();
+    expect(App.prototype.getIssueRange.calledOnce).to.equal(true);
+  });
+
+    it('it should have an initial state ', () => {
+    expect(wrapper.state('issueList')).to.eql([]);
+    expect(wrapper.state('stateObj')).to.eql({});
+    expect(wrapper.state('fromDate')).to.eql('');
+    expect(wrapper.state('toDate')).to.eql('');
+  });
+
+   it('it should update state of issueList', () => {
+    const wrapper = shallow(<App />);
+    const mockData = ['random', 'data', 'works'];
+    wrapper.setState({ issueList: mockData });
+    expect(wrapper.state('issueList')).to.eql(mockData);
+  });
 });
 
 

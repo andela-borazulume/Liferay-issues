@@ -4,7 +4,7 @@ import { expect } from "chai";
 import sinon from "sinon";
 
 import App from "../src/App";
-import Chart from "../src/showChart";
+import Chart from "../src/SetUpChart";
 import FormContainer from "../src/FormContainer";
 
 describe('<App/>', () => {
@@ -38,14 +38,14 @@ describe('<App/>', () => {
     expect(App.prototype.getIssueRange.calledOnce).to.equal(true);
   });
 
-    it('it should have an initial state ', () => {
+  it('it should have an initial state ', () => {
     expect(wrapper.state('issueList')).to.eql([]);
     expect(wrapper.state('stateObj')).to.eql({});
     expect(wrapper.state('fromDate')).to.eql('');
     expect(wrapper.state('toDate')).to.eql('');
   });
 
-   it('it should update state of issueList', () => {
+  it('it should update state of issueList', () => {
     const wrapper = shallow(<App />);
     const mockData = ['random', 'data', 'works'];
     wrapper.setState({ issueList: mockData });
